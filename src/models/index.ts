@@ -1,0 +1,1 @@
+export { HelloModel } from "./hello.model";
