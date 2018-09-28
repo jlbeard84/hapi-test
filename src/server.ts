@@ -2,9 +2,10 @@ import { Server } from "hapi";
 import { HelloRoute, RootRoute, TokenRoute } from "./routes";
 import { IAppRoute, IAppMiddleware } from "./interfaces";
 import { AuthorizationMiddleware } from "./middleware";
+import { Config } from "config";
 
 const server: Server = new Server({
-    port: 8000,
+    port: process.env.PORT || Config.DefaultPort || 8000,
     host: "localhost"
 });
 
