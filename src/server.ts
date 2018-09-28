@@ -1,6 +1,7 @@
 import { Server } from "hapi";
 import { HelloRoute, RootRoute, TokenRoute } from "./routes";
-import { IAppRoute } from "./interfaces";
+import { IAppRoute, IAppMiddleware } from "./interfaces";
+import { AuthorizationMiddleware } from "./middleware";
 
 const server: Server = new Server({
     port: 8000,
@@ -13,18 +14,35 @@ const appRoutes: IAppRoute[] = [
     new HelloRoute()
 ];
 
-for (const appRoute of appRoutes) {
-    for (const route of appRoute.routes) {
-        server.route(route);
-    }
-}
+const middlewares: IAppMiddleware[] = [
+    new AuthorizationMiddleware()
+];
 
 const init = async () => {
+    
+    console.log("Configuring middleware...");
+
+    for (const middleware of middlewares) {
+        await middleware.configure(server);
+    }
+    
+    console.log("Configuring routes...");
+    
+    for (const appRoute of appRoutes) {
+        for (const route of appRoute.routes) {
+            server.route(route);
+        }
+    }
+
+    console.log("Starting server...");
+
     await server.start();
+
     console.log(`Server running at: ${server.info.uri}`);
 };
 
 process.on("unhandledRejection", (error: Error) => {
+    console.log(error);
     process.exit(1);
 });
 

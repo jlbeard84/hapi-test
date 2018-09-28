@@ -1,5 +1,5 @@
-import { TokenController } from "controllers";
-import { IAppRoute } from "interfaces";
+import { TokenController } from "../controllers";
+import { IAppRoute } from "../interfaces";
 import { ServerRoute } from "hapi";
 
 export class TokenRoute implements IAppRoute {
@@ -13,7 +13,10 @@ export class TokenRoute implements IAppRoute {
             {
                 path: "/token",
                 method: "POST",
-                handler: this.controller.post
+                handler: this.controller.post,
+                options: {
+                    auth: false
+                }
             }
         ]
     }

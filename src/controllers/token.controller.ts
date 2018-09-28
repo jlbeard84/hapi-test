@@ -1,9 +1,9 @@
 import { Request, ResponseObject, ResponseToolkit } from "hapi";
 import { hashSync, compareSync } from "bcrypt-nodejs";
-import { badRequest } from "boom";
+import { badRequest, unauthorized } from "boom";
 import { sign } from "jsonwebtoken"
-import { UserModel } from "models";
-import { Config } from "config";
+import { UserModel } from "../models";
+import { Config } from "../config";
 
 export class TokenController {
 
@@ -25,7 +25,7 @@ export class TokenController {
 
         // TODO: check against some sort of auth store
         if (username !== validUsername || !compareSync(password, hashedValidPassword)) {
-            throw badRequest(TokenController.INVALID_UNPW_MESSAGE);
+            throw unauthorized(TokenController.INVALID_UNPW_MESSAGE);
         }
 
         const userModel = new UserModel();
