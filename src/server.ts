@@ -1,5 +1,5 @@
 import { Server } from "hapi";
-import { HelloRoute, RootRoute } from "./routes";
+import { HelloRoute, RootRoute, TokenRoute } from "./routes";
 import { IAppRoute } from "./interfaces";
 
 const server: Server = new Server({
@@ -9,6 +9,7 @@ const server: Server = new Server({
 
 const appRoutes: IAppRoute[] = [
     new RootRoute(),
+    new TokenRoute(),
     new HelloRoute()
 ];
 
