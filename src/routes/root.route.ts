@@ -13,12 +13,18 @@ export class RootRoute implements IAppRoute {
             {
                 path: "/",
                 method: "GET",
-                handler: this.controller.get
+                handler: this.controller.get,
+                options: {
+                    auth: false
+                }
             },
             {
                 path: "/",
                 method: "POST",
-                handler: this.controller.post
+                handler: this.controller.post,
+                options: {
+                    auth: false
+                }
             }
         ]
     }
