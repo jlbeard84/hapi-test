@@ -1,12 +1,17 @@
-import { Server } from "hapi";
+import { Server, ServerOptions } from "hapi";
 import { HelloRoute, RootRoute, TokenRoute } from "./routes";
 import { IAppRoute, IAppMiddleware } from "./interfaces";
 import { AuthorizationMiddleware } from "./middleware";
+import { Config } from "./config";
 
-const server: Server = new Server({
-    port: 8000,
+const config: Config = new Config();
+
+const serverOptions: ServerOptions = {
+    port: config.Port,
     host: "localhost"
-});
+};
+
+const server: Server = new Server(serverOptions);
 
 const appRoutes: IAppRoute[] = [
     new RootRoute(),

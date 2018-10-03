@@ -15,14 +15,16 @@ export class AuthorizationMiddleware implements IAppMiddleware {
 
         const validationFunction = this.validateToken;
 
+        const config = new Config();
+
         server.auth.strategy(
             AuthorizationMiddleware.STRATEGY_NAME,
             AuthorizationMiddleware.STRATEGY_NAME,
             {
-                key: Config.SecretKey,
+                key: config.SecretKey,
                 validate: validationFunction,
                 verifyOptions: {
-                    algoritms: [ Config.AuthAlgorithm ]
+                    algoritms: [ config.AuthAlgorithm ]
                 }
             });
 

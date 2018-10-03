@@ -32,12 +32,14 @@ export class TokenController {
         userModel.id = 1;
         userModel.username = username;
 
+        const config = new Config();
+
         const jwt: string = sign(
             JSON.parse(JSON.stringify(userModel)),
-            Config.SecretKey,
+            config.SecretKey,
             {
-                algorithm: Config.AuthAlgorithm,
-                expiresIn: Config.TokenExpirationTime
+                algorithm: config.AuthAlgorithm,
+                expiresIn: config.TokenExpirationTime
             }
         );
 
