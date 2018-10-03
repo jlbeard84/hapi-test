@@ -1,5 +1,5 @@
 import { Server, ServerOptions } from "hapi";
-import { HelloRoute, RootRoute, TokenRoute } from "./routes";
+import { HelloRoute, RootRoute, TokenRoute, DbModelRoute } from "./routes";
 import { IAppRoute, IAppMiddleware } from "./interfaces";
 import { AuthorizationMiddleware } from "./middleware";
 import { Config, ControllerConfig } from "./config";
@@ -18,7 +18,8 @@ const controllerConfig = new ControllerConfig();
 const appRoutes: IAppRoute[] = [
     new RootRoute(controllerConfig),
     new TokenRoute(controllerConfig),
-    new HelloRoute(controllerConfig)
+    new HelloRoute(controllerConfig),
+    new DbModelRoute(controllerConfig)
 ];
 
 const middlewares: IAppMiddleware[] = [

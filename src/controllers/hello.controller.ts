@@ -1,13 +1,7 @@
 import { HelloModel } from "../models";
 import { Request, ResponseObject, ResponseToolkit } from "hapi";
-import { BaseController } from "./base.controller";
-import { ControllerConfig } from "../config";
 
-export class HelloController extends BaseController {
-
-    constructor(controllerConfig: ControllerConfig) {
-        super(controllerConfig);
-    }
+export class HelloController {
 
     public get(request: Request, h: ResponseToolkit): ResponseObject {
 

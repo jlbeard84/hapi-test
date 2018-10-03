@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
         "module":"commonjs",
-        "target": "es6",
+        "target": "es2016",
         "moduleResolution": "node",
         "pretty": true,
         "sourceMap": true,
         "outDir": "./dist",
         "baseUrl": "./src",
         "lib": [
-            "es2015"
+            "es2016"
         ]
     },
     "include": [

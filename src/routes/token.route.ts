@@ -1,28 +1,26 @@
 import { TokenController } from "../controllers";
 import { IAppRoute } from "../interfaces";
-import { ServerRoute } from "hapi";
 import { ControllerConfig } from "../config";
+import { AppBaseRoute } from "./app-base.route";
 
-export class TokenRoute implements IAppRoute {
+export class TokenRoute extends AppBaseRoute implements IAppRoute {
 
     private readonly controller: TokenController;
-
-    public routes: ServerRoute[] = [];
 
     constructor(
         controllerConfig: ControllerConfig) {
 
-        this.controller = new TokenController(controllerConfig)
+        super(controllerConfig);
 
-        this.routes = [
-            {
-                path: "/token",
-                method: "POST",
-                handler: this.controller.post,
-                options: {
-                    auth: false
-                }
+        this.controller = new TokenController()
+
+        this.routes.push({
+            path: "/token",
+            method: "POST",
+            handler: this.controller.post,
+            options: {
+                auth: false
             }
-        ]
+        });
     }
 }
