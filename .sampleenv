@@ -2,3 +2,7 @@ SECRET_KEY="---paste a key here---"
 AUTH_ALGORITHM="HS256"
 TOKEN_EXPIRATION_TIME="1h"
 PORT=8000
+DB_SERVER="---paste a server address here---"
+DB_DATABASE="---paste a db name here---"
+DB_USERNAME="---paste a db username here---"
+DB_PASSWORD="---paste a db password here---"

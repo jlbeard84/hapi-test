@@ -3,7 +3,7 @@ import { hashSync, compareSync } from "bcrypt-nodejs";
 import { badRequest, unauthorized } from "boom";
 import { sign } from "jsonwebtoken"
 import { UserModel } from "../models";
-import { Config } from "../config";
+import { Config, ControllerConfig } from "../config";
 
 export class TokenController {
 

@@ -1,15 +1,20 @@
 import { HelloController } from "../controllers";
 import { IAppRoute } from "../interfaces";
-import { ServerRoute } from "hapi";
+import { ControllerConfig } from "../config";
+import { AppBaseRoute } from "./app-base.route";
 
-export class HelloRoute implements IAppRoute {
+export class HelloRoute extends AppBaseRoute implements IAppRoute {
 
-    private readonly controller: HelloController = new HelloController();
+    private readonly controller: HelloController;
 
-    public routes: ServerRoute[] = [];
+    constructor(
+        controllerConfig: ControllerConfig) {
+        
+        super(controllerConfig);
 
-    constructor() {
-        this.routes = [
+        this.controller = new HelloController();
+
+        this.routes.push(...[
             {
                 path: "/hello",
                 method: "GET",
@@ -20,6 +25,6 @@ export class HelloRoute implements IAppRoute {
                 method: "GET",
                 handler: this.controller.get
             }
-        ]
+        ]);
     }
 }

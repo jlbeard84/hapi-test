@@ -1,31 +1,35 @@
 import { RootController } from "../controllers";
 import { IAppRoute } from "../interfaces";
-import { ServerRoute } from "hapi";
+import { ControllerConfig } from "../config";
+import { AppBaseRoute } from "./app-base.route";
 
-export class RootRoute implements IAppRoute {
+export class RootRoute extends AppBaseRoute implements IAppRoute {
 
-    private readonly controller: RootController = new RootController();
+    private readonly controller: RootController;
 
-    public routes: ServerRoute[] = [];
+    constructor(        
+        controllerConfig: ControllerConfig) {
 
-    constructor() {
-        this.routes = [
-            {
-                path: "/",
-                method: "GET",
-                handler: this.controller.get,
-                options: {
-                    auth: false
-                }
-            },
-            {
-                path: "/",
-                method: "POST",
-                handler: this.controller.post,
-                options: {
-                    auth: false
-                }
+        super(controllerConfig);
+
+        this.controller = new RootController();
+
+        this.routes.push({
+            path: "/",
+            method: "GET",
+            handler: this.controller.get,
+            options: {
+                auth: false
             }
-        ]
+        });
+
+        this.routes.push({
+            path: "/",
+            method: "POST",
+            handler: this.controller.post,
+            options: {
+                auth: false
+            }
+        });
     }
 }
