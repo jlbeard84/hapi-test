@@ -3,11 +3,16 @@ import { hashSync, compareSync } from "bcrypt-nodejs";
 import { badRequest, unauthorized } from "boom";
 import { sign } from "jsonwebtoken"
 import { UserModel } from "../models";
-import { Config } from "../config";
+import { Config, ControllerConfig } from "../config";
+import { BaseController } from "./base.controller";
 
-export class TokenController {
+export class TokenController extends BaseController {
 
     public static INVALID_UNPW_MESSAGE = "Invalid username/password";
+
+    constructor(controllerConfig: ControllerConfig) {
+        super(controllerConfig);
+    }
 
     public post(request: Request, h: ResponseToolkit): ResponseObject {
 

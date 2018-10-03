@@ -1,14 +1,19 @@
 import { TokenController } from "../controllers";
 import { IAppRoute } from "../interfaces";
 import { ServerRoute } from "hapi";
+import { ControllerConfig } from "../config";
 
 export class TokenRoute implements IAppRoute {
 
-    private readonly controller: TokenController = new TokenController();
+    private readonly controller: TokenController;
 
     public routes: ServerRoute[] = [];
 
-    constructor() {
+    constructor(
+        controllerConfig: ControllerConfig) {
+
+        this.controller = new TokenController(controllerConfig)
+
         this.routes = [
             {
                 path: "/token",

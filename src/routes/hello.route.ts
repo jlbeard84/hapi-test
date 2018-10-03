@@ -1,14 +1,19 @@
 import { HelloController } from "../controllers";
 import { IAppRoute } from "../interfaces";
 import { ServerRoute } from "hapi";
+import { ControllerConfig } from "../config";
 
 export class HelloRoute implements IAppRoute {
 
-    private readonly controller: HelloController = new HelloController();
+    private readonly controller: HelloController;
 
     public routes: ServerRoute[] = [];
 
-    constructor() {
+    constructor(
+        controllerConfig: ControllerConfig) {
+
+        this.controller = new HelloController(controllerConfig);
+
         this.routes = [
             {
                 path: "/hello",

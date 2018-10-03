@@ -2,7 +2,7 @@ import { Server, ServerOptions } from "hapi";
 import { HelloRoute, RootRoute, TokenRoute } from "./routes";
 import { IAppRoute, IAppMiddleware } from "./interfaces";
 import { AuthorizationMiddleware } from "./middleware";
-import { Config } from "./config";
+import { Config, ControllerConfig } from "./config";
 
 const config: Config = new Config();
 
@@ -13,10 +13,12 @@ const serverOptions: ServerOptions = {
 
 const server: Server = new Server(serverOptions);
 
+const controllerConfig = new ControllerConfig();
+
 const appRoutes: IAppRoute[] = [
-    new RootRoute(),
-    new TokenRoute(),
-    new HelloRoute()
+    new RootRoute(controllerConfig),
+    new TokenRoute(controllerConfig),
+    new HelloRoute(controllerConfig)
 ];
 
 const middlewares: IAppMiddleware[] = [
